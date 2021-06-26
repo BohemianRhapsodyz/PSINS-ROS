@@ -1,0 +1,4 @@
+<launch>
+    <node pkg="od_sins_realtime" type="od_sins_node" name="od_sins_node" output="screen"/>
+    <node pkg="od_sins_realtime" type="readimu_node" name="readimu_node" output="screen"/>
+</launch>
