@@ -1,83 +1,5 @@
 #include "KFApp.h"
 #include "PSINS.h"
-/***************************  class CKFApp  *********************************/
-//CKFApp::CKFApp(double ts) :CSINSTDKF(34, 6)
-//{
-//	lvGPS = O31;
-//}
-//
-//void CKFApp::Init(const CSINS &sins0, int grade)
-//{
-//	CSINSKF::Init(sins0);
-//	sins.lever(-lvGPS);
-//	sins.pos = sins.posL;
-//	Pk.SetDiag2(0.1*DEG, 0.1*DEG, 1.0*DEG, 1.0, 1.0, 1.0, 10.0 / RE, 10.0 / RE, 10.0,
-//		0.01*DPH, 0.01*DPH, 0.01*DPH, 100.0*UG, 100.0*UG, 500.0*UG,
-//		1.0, 1.0, 1.0, 0.001,
-//		1000.0*PPM, 10.0*SEC, 10.0*SEC, 10.0*SEC, 1000.0*PPM, 10.0*SEC, 10.0*SEC, 10.0*SEC, 1000.0*PPM,
-//		1000.0*PPM, 10.0*SEC, 10.0*SEC, 1000.0*PPM, 10.0*SEC, 10.0*PPM
-//	);
-//	Pmin.Set2(1.1*SEC, 1.1*SEC, 10.0*SEC, 0.001, 0.001, 0.001, 0.001 / RE, 0.001 / RE, 0.001,
-//		0.001*DPH, 0.001*DPH, 0.001*DPH, 10.0*UG, 10.0*UG, 20.0*UG,
-//		0.01, 0.01, 0.01, 0.0001,
-//		0.0*PPM, 0.0*SEC, 0.0*SEC, 0.0*SEC, 0.0*PPM, 0.0*SEC, 0.0*SEC, 0.0*SEC, 0.0*PPM,
-//		0.0*PPM, 0.0*SEC, 0.0*SEC, 0.0*PPM, 0.0*SEC, 0.0*PPM
-//	);
-//	Qt.Set2(0.01*glv.dpsh, 0.01*glv.dpsh, 0.01*glv.dpsh, 10.0*glv.ugpsHz, 10.0*glv.ugpsHz, 20.0*glv.ugpsHz, 0.0, 0.0, 0.0,
-//		0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-//		0.0, 0.0, 0.0, 0.0,
-//		0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-//		0.0, 0.0, 0.0, 0.0, 0.0, 0.0
-//	);
-//	FBTau.Set(1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-//		1.0, 1.0, 1.0, 1.0, 1.0, 1.0,
-//		INF, INF, INF, INF,
-//		INF, INF, INF, INF, INF, INF, INF, INF, INF,
-//		INF, INF, INF, INF, INF, INF
-//	);
-//	Rt.Set2(0.10, 0.10, 0.10, .10 / RE, .10 / RE, .10);
-//	Rmax = Rt * 100.;  Rmin = Rt * 0.01;  Rb = 0.9;
-//	rts = 1.0;
-//}
-//
-//void CKFApp::SetMeasGPS(const CVect3 &posGPS, const CVect3 &vnGPS, double dt)
-//{
-//	if (!IsZero(posGPS, EPS) && sins.wnb.k<30.0 * DPS && sins.wnb.k>-30.0 * DPS)
-//	{
-//		sins.lever(lvGPS);
-//		if (!IsZero(vnGPS, EPS))
-//		{
-//			*(CVect3*)&Zk.dd[0] = sins.vnL - sins.an*dt - vnGPS;
-//			SetMeasFlag(00007);
-//		}
-//		*(CVect3*)&Zk.dd[3] = sins.posL - sins.Mpv*sins.vn*dt - posGPS;
-//		SetMeasFlag(00070);
-//	}
-//}
-//
-//int CKFApp::Update(const CVect3 *pwm, const CVect3 *pvm, int nSamples, double ts)
-//{
-//	int res = TDUpdate(pwm, pvm, nSamples, ts, 5);
-//	CVect3 lv = (lvGPS + *(CVect3*)&Xk.dd[15]);
-//	vnRes = sins.vn + sins.Cnb*askew(sins.web)*lv + sins.an*Xk.dd[18];
-//	posRes = sins.pos + sins.MpvCnb*lv + sins.Mpv*sins.vn*Xk.dd[18];
-//	xpt.att = sins.att; xpt.vn = vnRes; xpt.pos = posRes;
-//	double *p = &xpt.Patt.i, *p1 = &Pk.dd[0];
-//	for (int i = 0; i < 9; i++, p++, p1 += nq + 1) *p = *p1;
-//	return res;
-//}
-//
-//void CKFApp::Reverse(void)
-//{
-//	sins.eth.wie = -sins.eth.wie;  sins.vn = -sins.vn; sins.eb = -sins.eb;
-//	vnRes = -vnRes; xpt.vn = -xpt.vn;
-//	int idx[] = { 3,4,5, 9,10,11, 18 };
-//	for (int k = 0; k < (sizeof(idx) / sizeof(int)); k++) Xk.dd[idx[k]] = -Xk.dd[idx[k]];
-//	TDReset();
-//	int idxp[] = { 0,1, 3,4,5, 6,7,8, 14 };
-//	Pset = diag(Pk);
-//	for (int p = 0; p < (sizeof(idxp) / sizeof(int)); p++) Pset.dd[idxp[p]] = 10.0*Pset.dd[idxp[p]];
-//}
 /***************************  class CSINSOD  *********************************/
 CSINSOD::CSINSOD(void) :CSINSTDKF(21, 10)
 {
@@ -93,64 +15,10 @@ void CSINSOD::Init(const CSINS &sins0, int grade)
 {
 	CSINSKF::Init(sins0);
 	sins.lever(-lvOD);
-	sins.pos = sins.posL;   //IMUת����̼�λ��
+	sins.pos = sins.posL;   //Convert IMU to encoder
 	//posDR = sins0.pos;
 	posDR = sins.posL;
 	//posDR = sins.pos;
-	/*Pmax.Set2(10.0*glv.deg, 10.0*glv.deg, 30.0*glv.deg, 50.0, 50.0, 50.0, 1.0e4 / glv.Re, 1.0e4 / glv.Re, 1.0e4,
-		10.0*glv.dph, 10.0*glv.dph, 10.0*glv.dph, 10.0*glv.mg, 10.0*glv.mg, 10.0*glv.mg, 1 * glv.deg, 0.01, 1 * glv.deg, 1.0e4 / glv.Re, 1.0e4 / glv.Re, 1.0e4);
-	Pmin.Set2(0.01*glv.min, 0.01*glv.min, 0.1*glv.min, 0.01, 0.01, 0.1, 1.0 / glv.Re, 1.0 / glv.Re, 0.1,
-		0.001*glv.dph, 0.001*glv.dph, 0.001*glv.dph, 5.0*glv.ug, 5.0*glv.ug, 15.0*glv.ug, 1 * glv.min, 0.0001, 0.2*glv.min, 1.0 / glv.Re, 1.0 / glv.Re, 1.0);
-	Pk.SetDiag2(1.0*glv.deg, 1.0*glv.deg, 1.0*glv.deg, 1.0, 1.0, 1.0, 100.0 / glv.Re, 100.0 / glv.Re, 100.0,
-		0.01*glv.dph, 0.01*glv.dph, 0.01*glv.dph, .10*glv.mg, .10*glv.mg, .10*glv.mg, 10.0*glv.min, 0.05, 15 * glv.min, 1.0e1 / glv.Re, 1.0e1 / glv.Re, 1.0e1);
-	Qt.Set2(0.001*glv.dpsh, 0.001*glv.dpsh, 0.001*glv.dpsh, 1.0*glv.ugpsHz, 1.0*glv.ugpsHz, 1.0*glv.ugpsHz, 0.0, 0.0, 0.0,
-		0.0*glv.dphpsh, 0.0*glv.dphpsh, 0.0*glv.dphpsh, 0.0*glv.ugpsh, 0.0*glv.ugpsh, 0.0*glv.ugpsh, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
-	Xmax.Set(INF, INF, INF, INF, INF, INF, INF, INF, INF, 0.1*glv.dph, 0.1*glv.dph, 0.1*glv.dph, 200.0*glv.ug, 200.0*glv.ug, 200.0*glv.ug, 1 * glv.deg, 0.05, 1 * glv.deg, INF, INF, INF);
-	Rt.Set2(0.2, 0.2, 0.6, 10.0 / glv.Re, 10.0 / glv.Re, 30.0, 10.1 / RE, 10.1 / RE, 10.1);*/
-
-//	Pmax.Set2(10.0*glv.deg, 10.0*glv.deg, 30.0*glv.deg,
-//		50.0, 50.0, 50.0,
-//		1.0e4 / glv.Re, 1.0e4 / glv.Re, 1.0e4,
-//		10.0*glv.dph, 10.0*glv.dph, 10.0*glv.dph,
-//		10.0*glv.mg, 10.0*glv.mg, 10.0*glv.mg,
-//		1 * glv.deg, 0.01, 1 * glv.deg,
-//		1.0e4 / glv.Re, 1.0e4 / glv.Re, 1.0e4);
-//
-//	Pmin.Set2(0.01*glv.min, 0.01*glv.min, 0.1*glv.min,
-//		0.01, 0.01, 0.1,
-//		1.0 / glv.Re, 1.0 / glv.Re, 0.1,
-//		0.001*glv.dph, 0.001*glv.dph, 0.001*glv.dph,
-//		5.0*glv.ug, 5.0*glv.ug, 15.0*glv.ug,
-//		1 * glv.min, 0.0001, 0.2*glv.min,
-//		1.0 / glv.Re, 1.0 / glv.Re, 1.0);
-//
-//	Pk.SetDiag2(1.0*glv.deg, 1.0*glv.deg, 1.0*glv.deg,
-//		1.0, 1.0, 1.0,
-//		100.0 / glv.Re, 100.0 / glv.Re, 100.0,
-//		0.01*glv.dph, 0.01*glv.dph, 0.01*glv.dph,
-//		.10*glv.mg, .10*glv.mg, .10*glv.mg,
-//		10.0*glv.min, 0.05, 15 * glv.min,
-//		1.0e1 / glv.Re, 1.0e1 / glv.Re, 1.0e1);
-//
-//	Qt.Set2(0.001*glv.dpsh, 0.001*glv.dpsh, 0.001*glv.dpsh,
-//		1.0*glv.ugpsHz, 1.0*glv.ugpsHz, 1.0*glv.ugpsHz,
-//		0.0, 0.0, 0.0,
-//		0.0*glv.dphpsh, 0.0*glv.dphpsh, 0.0*glv.dphpsh,
-//		0.0*glv.ugpsh, 0.0*glv.ugpsh, 0.0*glv.ugpsh,
-//		0.0, 0.0, 0.0,
-//		0.0, 0.0, 0.0);
-//
-//	Xmax.Set(INF, INF, INF,
-//		INF, INF, INF,
-//		INF, INF, INF,
-//		0.1*glv.dph, 0.1*glv.dph, 0.1*glv.dph,
-//		200.0*glv.ug, 200.0*glv.ug, 200.0*glv.ug,
-//		1 * glv.deg, 0.05, 1 * glv.deg,
-//		INF, INF, INF);
-//
-//	Rt.Set2(0.2, 0.2, 0.6,
-//		10.0 / glv.Re, 10.0 / glv.Re, 30.0,
-//		10.1 / RE, 10.1 / RE, 10.1);
 
 	Pmax.Set2(10.0*glv.deg, 10.0*glv.deg, 30.0*glv.deg,
 		50.0, 50.0, 50.0,
@@ -174,7 +42,7 @@ void CSINSOD::Init(const CSINS &sins0, int grade)
 		0.01*glv.dph, 0.01*glv.dph, 0.01*glv.dph,
 		.10*glv.mg, .10*glv.mg, .10*glv.mg,
 		10.0*glv.min, 0.05, 15 * glv.min,
-		5 / glv.Re, 5 / glv.Re, 10);
+		5 / glv.Re, 5 / glv.Re, 10.0);
 
 	Qt.Set2(0.001*glv.dpsh, 0.001*glv.dpsh, 0.001*glv.dpsh,
 		1.0*glv.ugpsHz, 1.0*glv.ugpsHz, 1.0*glv.ugpsHz,
@@ -195,70 +63,6 @@ void CSINSOD::Init(const CSINS &sins0, int grade)
 	Rt.Set2(0.2, 0.2, 0.6,
 		10.0 / glv.Re, 10.0 / glv.Re, 30.0,
 		0.5 / RE, 0.5 / RE, 2);
-
-	//Pmax.Set2(10.0*glv.deg, 10.0*glv.deg, 30.0*glv.deg, 50.0, 50.0, 50.0, 1.0e4 / glv.Re, 1.0e4 / glv.Re, 1.0e4,
-	//	10.0*glv.dph, 10.0*glv.dph, 10.0*glv.dph, 10.0*glv.mg, 10.0*glv.mg, 10.0*glv.mg, 0 * glv.deg, 0.0, 0 * glv.deg, 1.0e4 / glv.Re, 1.0e4 / glv.Re, 1.0e4);
-	//Pmin.Set2(0.01*glv.min, 0.01*glv.min, 0.1*glv.min, 0.01, 0.01, 0.1, 1.0 / glv.Re, 1.0 / glv.Re, 0.1,
-	//	0.001*glv.dph, 0.001*glv.dph, 0.001*glv.dph, 5.0*glv.ug, 5.0*glv.ug, 15.0*glv.ug, 0 * glv.min, 0.000, 0*glv.min, 1.0 / glv.Re, 1.0 / glv.Re, 1.0);
-	//Pk.SetDiag2(1.0*glv.deg, 1.0*glv.deg, 1.0*glv.deg, 1.0, 1.0, 1.0, 100.0 / glv.Re, 100.0 / glv.Re, 100.0,
-	//	0.01*glv.dph, 0.01*glv.dph, 0.01*glv.dph, .10*glv.mg, .10*glv.mg, .10*glv.mg, 0.0*glv.min, 0.0, 0 * glv.min, 1.0e1 / glv.Re, 1.0e1 / glv.Re, 1.0e1);
-	//Qt.Set2(0.001*glv.dpsh, 0.001*glv.dpsh, 0.001*glv.dpsh, 1.0*glv.ugpsHz, 1.0*glv.ugpsHz, 1.0*glv.ugpsHz, 0.0, 0.0, 0.0,
-	//	0.0*glv.dphpsh, 0.0*glv.dphpsh, 0.0*glv.dphpsh, 0.0*glv.ugpsh, 0.0*glv.ugpsh, 0.0*glv.ugpsh, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
-	//Xmax.Set(INF, INF, INF, INF, INF, INF, INF, INF, INF, 0.1*glv.dph, 0.1*glv.dph, 0.1*glv.dph, 200.0*glv.ug, 200.0*glv.ug, 200.0*glv.ug, 0 * glv.deg, 0.0, 0 * glv.deg, INF, INF, INF);
-	//Rt.Set2(0.2, 0.2, 0.6, 10.0 / glv.Re, 10.0 / glv.Re, 30.0, 10.1 / RE, 10.1 / RE, 10.1);
-
-	//Pmax.Set2(10.0*glv.deg, 10.0*glv.deg, 30.0*glv.deg,  
-	//		  50.0, 50.0, 50.0,
-	//	      1.0e4 / glv.Re, 1.0e4 / glv.Re, 1.0e4,
-	//		  10.0*glv.dph, 10.0*glv.dph, 10.0*glv.dph, 
-	//		  1000.0*glv.mg, 1000.0*glv.mg, 1000.0*glv.mg, 
-	//	      10 * glv.deg, 1, 10 * glv.deg, 
-	//	      1.0e4 / glv.Re, 1.0e4 / glv.Re, 1.0e4);
-	//
-	//Pmin.Set2(0.01*glv.min, 0.01*glv.min, 0.1*glv.min,
-	//		  0.001, 0.001, 0.001, 
-	//		  0.001 / glv.Re, 0.001 / glv.Re, 0.001,
-	//		  0.0001*glv.dph, 0.0001*glv.dph, 0.0001*glv.dph, 
-	//		  1.0*glv.ug, 1.0*glv.ug, 1.0*glv.ug,
-	//		  0.0 * glv.min, 0.00000, 0.0*glv.min, 
-	//		  0.001 / glv.Re, 0.001 / glv.Re, 0.001);
-	//
-	//Pk.SetDiag2(0.1*glv.deg, 0.1*glv.deg, 0.1*glv.deg, 
-	//			0.1, 0.1, 0.1, 
-	//			1.0 / glv.Re, 1.0 / glv.Re, 1.0,
-	//			0.01*glv.dph, 0.01*glv.dph, 0.01*glv.dph,
-	//		    .10*glv.mg, .10*glv.mg, .10*glv.mg, 
-	//		    0*glv.min, 0.00, 0 * glv.min,
-	//		    1.0 / glv.Re, 1.0 / glv.Re, 1.0);
-	//
-	//Qt.Set2(0.001*glv.dpsh, 0.001*glv.dpsh, 0.001*glv.dpsh,
-	//		1.0*glv.ugpsHz, 1.0*glv.ugpsHz, 1.0*glv.ugpsHz,
-	//		0.0, 0.0, 0.0,
-	//		0.0*glv.dphpsh, 0.0*glv.dphpsh, 0.0*glv.dphpsh, 
-	//		0.0*glv.ugpsh, 0.0*glv.ugpsh, 0.0*glv.ugpsh,
-	//		0.0, 0.0, 0.0,
-	//		0.0, 0.0, 0.0);
-	//
-	//Xmax.Set(INF, INF, INF,
-	//		 INF, INF, INF,
-	//		 INF, INF, INF,
-	//		 1*glv.dph, 1*glv.dph, 1*glv.dph, 
-	//		 200.0*glv.mg, 200.0*glv.mg, 200.0*glv.mg,
-	//		 0 * glv.deg, 0, 0 * glv.deg, 
-	//		 INF, INF, INF);
-	//
-	///*Rt.Set2(0.2, 0.2, 0.6,
-	//		10.0 / glv.Re, 10.0 / glv.Re, 30.0, 
-	//		5.0 / RE, 5.0 / RE, 5.0,
-	//		0.1*glv.deg	);*/
-	//Rt.Set2(0.1, 0.1, 0.1,
-	//	1 / glv.Re, 1 / glv.Re, 5,
-	//	0.1 / RE, 0.1 / RE, 1,
-	//	0.5*glv.deg);
-	////Rt.Set2(0, 0, 0,
-	////	0 / glv.Re, 0 / glv.Re, 0,
-	////	1 / RE, 1 / RE, 1,
-	////	0*glv.deg);
 	Rmax = Rt * 100;  Rmin = Rt * 0.01;  Rb = 0.9;
 	FBTau.Set(1.0, 1.0, 10.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0);
 	//	FBTau.Set(1.0, 1.0, 10.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, INF, INF, INF);
@@ -474,9 +278,7 @@ CVect3 lla2enu(double latitude, double longtitude, double altitude, double latit
     double tmp_latitude0, tmp_longtitude0;
     double x,y,z;
     deg2rad=pi/180;
-    //latitude=latitude*deg2rad;
     tmp_latitude0=latitude0;
-    //longtitude=longtitude*deg2rad;
     tmp_longtitude0=longtitude0;
     e=sqrt(2*f-f*f);
     e2=e*e;

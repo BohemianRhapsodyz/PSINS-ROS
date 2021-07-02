@@ -45,8 +45,6 @@ include_directories(
 add_library(cpsins
         src/PSINS.cpp
         src/KFApp.cpp
-        src/calibration.cpp
-        src/zupt.cpp
         )
 
 target_link_libraries(cpsins ${catkin_LIBRARIES} )
@@ -56,9 +54,3 @@ target_link_libraries(od_sins_node cpsins)
 
 add_executable(readimu_node src/readimu_node.cpp)
 target_link_libraries(readimu_node cpsins)
-
-#add_executable(nav_pub_node src/nav_pub_node.cpp)
-#target_link_libraries(nav_pub_node cpsins)
-#add_executable(read_node src/readimu.cpp)
-
-#target_link_libraries(read_node psins)

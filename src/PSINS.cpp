@@ -1,5 +1,3 @@
-#define _CRT_SECURE_NO_WARNINGS
-
 #include "PSINS.h"
 
 const CVect3 I31(1.0), O31(0.0), Ipos(1.0 / RE, 1.0 / RE, 1.0);
@@ -3391,7 +3389,7 @@ CVect3 randn(const CVect3 &mu, const CVect3 &sigma)
 {
 	return CVect3(randn(mu.i, sigma.i), randn(mu.j, sigma.j), randn(mu.k, sigma.k));
 }
-///////////////////////////////////////新加////////////////////////////////////////////////
+///////////////////////////////////////new add////////////////////////////////////////////////
 
 std::ofstream & operator<<(std::ofstream &out, CVect3 &A){
     out << A.i <<"\t"<< A.j <<"\t" << A.k <<"\t";
