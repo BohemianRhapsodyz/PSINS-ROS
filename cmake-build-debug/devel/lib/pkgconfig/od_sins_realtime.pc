@@ -1,8 +1,0 @@
-prefix=/home/hx/od_sins_realtime_github/od_sins_realtime/cmake-build-debug/devel
-
-Name: od_sins_realtime
-Description: Description of od_sins_realtime
-Version: 0.0.0
-Cflags: 
-Libs: -L${prefix}/lib 
-Requires: 
