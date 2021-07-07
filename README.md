@@ -11,8 +11,8 @@ mkdir src
 cd src
 catkin_init_workspace
 git clone https://github.com/BohemianRhapsodyz/PSINS-ROS.git
-catkin_make
 cd ..
+catkin_make
 source devel/setup.bash
 roslaunch od_sins_realtime od_sins_realtime.launch
 ```
